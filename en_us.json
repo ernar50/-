@@ -1,0 +1,20 @@
+{
+  "entity.dotamobs.night_stalker": "Night Stalker",
+  "entity.dotamobs.alchemist": "Alchemist",
+  "entity.dotamobs.monkey_king": "Monkey King",
+  "entity.dotamobs.crystal_maiden": "Crystal Maiden",
+  "entity.dotamobs.disguised_cow": "Cow",
+  "entity.dotamobs.disguised_pig": "Pig",
+  "entity.dotamobs.disguised_sheep": "Sheep",
+  "item.dotamobs.night_stalker_spawn_egg": "Night Stalker Spawn Egg",
+  "item.dotamobs.alchemist_spawn_egg": "Alchemist Spawn Egg",
+  "item.dotamobs.monkey_king_spawn_egg": "Monkey King Spawn Egg",
+  "item.dotamobs.crystal_maiden_spawn_egg": "Crystal Maiden Spawn Egg",
+  "item.dotamobs.pudge_hook": "Pudge's Hook",
+  "entity.dotamobs.riki": "Riki",
+  "entity.dotamobs.zeus": "Zeus",
+  "item.dotamobs.riki_spawn_egg": "Riki Spawn Egg",
+  "item.dotamobs.zeus_spawn_egg": "Zeus Spawn Egg",
+  "item.dotamobs.blink_dagger": "Blink Dagger",
+  "item.dotamobs.radiance": "Radiance"
+}
