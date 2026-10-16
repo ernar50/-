@@ -1,0 +1,14 @@
+{
+  "entity.dotamobs.night_stalker": "Ночной сталкер",
+  "entity.dotamobs.alchemist": "Алхимик",
+  "entity.dotamobs.monkey_king": "Король обезьян",
+  "entity.dotamobs.crystal_maiden": "Кристальная дева",
+  "entity.dotamobs.disguised_cow": "Корова",
+  "entity.dotamobs.disguised_pig": "Свинья",
+  "entity.dotamobs.disguised_sheep": "Овца",
+  "item.dotamobs.night_stalker_spawn_egg": "Яйцо призыва: ночной сталкер",
+  "item.dotamobs.alchemist_spawn_egg": "Яйцо призыва: алхимик",
+  "item.dotamobs.monkey_king_spawn_egg": "Яйцо призыва: король обезьян",
+  "item.dotamobs.crystal_maiden_spawn_egg": "Яйцо призыва: кристальная дева",
+  "item.dotamobs.pudge_hook": "Крюк Пуджа"
+}

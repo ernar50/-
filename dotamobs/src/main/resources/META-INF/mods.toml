@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[66,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="dotamobs"
+version="${mod_version}"
+displayName="Dota Mobs"
+authors="You"
+description='''Four new mobs and one item:
+Night Stalker (turns day into night when he hits you),
+Alchemist (drops gold nuggets when hit, lives in mineshafts),
+Monkey King (lives in trees, jumps high, disguises as farm animals),
+Crystal Maiden (ranged ice attack, lives in snowy biomes),
+and Pudge's Hook (pulls creatures to you).'''
+
+[[dependencies.dotamobs]]
+    modId="forge"
+    mandatory=true
+    versionRange="[66,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.dotamobs]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[26.3,26.4)"
+    ordering="NONE"
+    side="BOTH"
