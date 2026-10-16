@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -55,7 +56,11 @@ public class BlinkDaggerItem extends Item {
         boolean success = false;
         for (double d = distance; d >= 2.0; d -= 1.0) {
             Vec3 spot = eye.add(look.scale(d));
-            if (player.randomTeleport(spot.x, spot.y - eyeHeight, spot.z, true)) {
+            double feetY = spot.y - eyeHeight;
+            // Is there room for the player's body at that spot?
+            AABB moved = player.getBoundingBox().move(spot.x - player.getX(), feetY - player.getY(), spot.z - player.getZ());
+            if (level.noCollision(player, moved)) {
+                player.teleportTo(spot.x, feetY, spot.z);
                 success = true;
                 break;
             }
