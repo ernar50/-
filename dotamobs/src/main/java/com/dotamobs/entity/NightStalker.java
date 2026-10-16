@@ -64,6 +64,9 @@ public class NightStalker extends Monster {
         return hit;
     }
 
+    /** By day a spawn attempt succeeds 1 time in N. Raise N to make daytime spawns rarer. */
+    private static final int DAY_SPAWN_ONE_IN = 10;
+
     /** True while it is night on the overworld clock. */
     public static boolean isNight(ServerLevel level) {
         var clock = level.registryAccess().getOrThrow(WorldClocks.OVERWORLD);
@@ -83,12 +86,16 @@ public class NightStalker extends Monster {
         level.clockManager().moveToTimeMarker(clock, ClockTimeMarkers.NIGHT);
     }
 
-    /** Natural spawn rule: outside, under the open sky, and only at night. */
+    /** Natural spawn rule: outside, under the open sky, at night, and rarely by day. */
     public static boolean checkSpawnRules(EntityType<NightStalker> type, ServerLevelAccessor level,
                                           EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         if (level.getDifficulty() == Difficulty.PEACEFUL) {
             return false;
         }
-        return level.canSeeSky(pos) && isNight(level.getLevel());
+        if (!level.canSeeSky(pos)) {
+            return false;
+        }
+        // At night always; by day only on a small share of spawn attempts, so he is rare.
+        return isNight(level.getLevel()) || random.nextInt(DAY_SPAWN_ONE_IN) == 0;
     }
 }

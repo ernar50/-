@@ -8,6 +8,8 @@ import com.dotamobs.entity.DisguisedPig;
 import com.dotamobs.entity.DisguisedSheep;
 import com.dotamobs.entity.MonkeyKing;
 import com.dotamobs.entity.NightStalker;
+import com.dotamobs.entity.Riki;
+import com.dotamobs.entity.Zeus;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
@@ -44,6 +46,18 @@ public final class ModEntities {
             .sized(0.6F, 1.7F)
             .clientTrackingRange(10)
             .build(ENTITIES.key("monkey_king")));
+
+    public static final RegistryObject<EntityType<Riki>> RIKI = ENTITIES.register("riki",
+        () -> EntityType.Builder.of(Riki::new, MobCategory.MONSTER)
+            .sized(0.6F, 1.8F)
+            .clientTrackingRange(8)
+            .build(ENTITIES.key("riki")));
+
+    public static final RegistryObject<EntityType<Zeus>> ZEUS = ENTITIES.register("zeus",
+        () -> EntityType.Builder.of(Zeus::new, MobCategory.MONSTER)
+            .sized(0.6F, 1.95F)
+            .clientTrackingRange(10)
+            .build(ENTITIES.key("zeus")));
 
     // Peaceful look-alikes the Monkey King turns into. Never spawned naturally.
     public static final RegistryObject<EntityType<DisguisedCow>> DISGUISED_COW = ENTITIES.register("disguised_cow",

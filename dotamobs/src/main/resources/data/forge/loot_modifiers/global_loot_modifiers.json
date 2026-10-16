@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "entries": [
+    "dotamobs:add_radiance",
+    "dotamobs:add_pudge_hook",
+    "dotamobs:add_blink_dagger"
+  ]
+}

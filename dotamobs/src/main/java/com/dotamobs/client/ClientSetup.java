@@ -5,6 +5,8 @@ import com.dotamobs.entity.Alchemist;
 import com.dotamobs.entity.CrystalMaiden;
 import com.dotamobs.entity.MonkeyKing;
 import com.dotamobs.entity.NightStalker;
+import com.dotamobs.entity.Riki;
+import com.dotamobs.entity.Zeus;
 import com.dotamobs.registry.ModEntities;
 import net.minecraft.client.renderer.entity.CowRenderer;
 import net.minecraft.client.renderer.entity.PigRenderer;
@@ -34,6 +36,10 @@ public final class ClientSetup {
             context -> new DotaMobRenderer<MonkeyKing>(context, skin("monkey_king"), 0.5F));
         event.registerEntityRenderer(ModEntities.CRYSTAL_MAIDEN.get(),
             context -> new DotaMobRenderer<CrystalMaiden>(context, skin("crystal_maiden"), 0.5F));
+        event.registerEntityRenderer(ModEntities.RIKI.get(),
+            context -> new DotaMobRenderer<Riki>(context, skin("riki"), 0.5F));
+        event.registerEntityRenderer(ModEntities.ZEUS.get(),
+            context -> new DotaMobRenderer<Zeus>(context, skin("zeus"), 0.5F));
 
         // Disguises use the exact vanilla renderers, so they are visually identical to real animals.
         event.registerEntityRenderer(ModEntities.DISGUISED_COW.get(), CowRenderer::new);

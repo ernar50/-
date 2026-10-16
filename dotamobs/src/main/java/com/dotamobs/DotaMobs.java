@@ -4,8 +4,12 @@ import com.dotamobs.entity.Alchemist;
 import com.dotamobs.entity.CrystalMaiden;
 import com.dotamobs.entity.MonkeyKing;
 import com.dotamobs.entity.NightStalker;
+import com.dotamobs.entity.Riki;
+import com.dotamobs.entity.Zeus;
 import com.dotamobs.registry.ModEntities;
 import com.dotamobs.registry.ModItems;
+import com.dotamobs.registry.ModLoot;
+import com.dotamobs.util.RadianceEffects;
 import com.dotamobs.util.ServerTasks;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.animal.cow.Cow;
@@ -17,6 +21,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -29,11 +34,15 @@ public final class DotaMobs {
 
         ModEntities.ENTITIES.register(modBus);
         ModItems.ITEMS.register(modBus);
+        ModLoot.MODIFIERS.register(modBus);
 
         // These events have their own BUS (they are no longer on the mod bus).
         EntityAttributeCreationEvent.BUS.addListener(DotaMobs::onAttributes);
         SpawnPlacementRegisterEvent.BUS.addListener(DotaMobs::onSpawnPlacements);
         BuildCreativeModeTabContentsEvent.BUS.addListener(DotaMobs::onCreativeTab);
+
+        // Radiance: fire around the victim on a melee hit.
+        LivingHurtEvent.BUS.addListener(RadianceEffects::onHurt);
 
         // Runs the short timed jobs (ice melting, hook pulling).
         TickEvent.ServerTickEvent.Post.BUS.addListener(ServerTasks::onServerTick);
@@ -44,6 +53,8 @@ public final class DotaMobs {
         event.put(ModEntities.ALCHEMIST.get(), Alchemist.createAttributes().build());
         event.put(ModEntities.MONKEY_KING.get(), MonkeyKing.createAttributes().build());
         event.put(ModEntities.CRYSTAL_MAIDEN.get(), CrystalMaiden.createAttributes().build());
+        event.put(ModEntities.RIKI.get(), Riki.createAttributes().build());
+        event.put(ModEntities.ZEUS.get(), Zeus.createAttributes().build());
 
         // The disguised animals behave exactly like the vanilla ones.
         event.put(ModEntities.DISGUISED_COW.get(), Cow.createAttributes().build());
@@ -72,6 +83,16 @@ public final class DotaMobs {
         event.register(ModEntities.CRYSTAL_MAIDEN.get(),
             SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
             CrystalMaiden::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+
+        // Riki: on the ground, day or night.
+        event.register(ModEntities.RIKI.get(),
+            SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+            Riki::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+
+        // Zeus: on the surface under the open sky, day or night.
+        event.register(ModEntities.ZEUS.get(),
+            SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+            Zeus::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
     }
 
     private static void onCreativeTab(BuildCreativeModeTabContentsEvent event) {
@@ -80,8 +101,12 @@ public final class DotaMobs {
             event.accept(ModItems.ALCHEMIST_SPAWN_EGG);
             event.accept(ModItems.MONKEY_KING_SPAWN_EGG);
             event.accept(ModItems.CRYSTAL_MAIDEN_SPAWN_EGG);
+            event.accept(ModItems.RIKI_SPAWN_EGG);
+            event.accept(ModItems.ZEUS_SPAWN_EGG);
         } else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(ModItems.PUDGE_HOOK);
+            event.accept(ModItems.BLINK_DAGGER);
+            event.accept(ModItems.RADIANCE);
         }
     }
 }

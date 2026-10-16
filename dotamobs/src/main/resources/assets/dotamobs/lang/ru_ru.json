@@ -10,5 +10,11 @@
   "item.dotamobs.alchemist_spawn_egg": "Яйцо призыва: алхимик",
   "item.dotamobs.monkey_king_spawn_egg": "Яйцо призыва: король обезьян",
   "item.dotamobs.crystal_maiden_spawn_egg": "Яйцо призыва: кристальная дева",
-  "item.dotamobs.pudge_hook": "Крюк Пуджа"
+  "item.dotamobs.pudge_hook": "Крюк Пуджа",
+  "entity.dotamobs.riki": "Рики",
+  "entity.dotamobs.zeus": "Зевс",
+  "item.dotamobs.riki_spawn_egg": "Яйцо призыва: Рики",
+  "item.dotamobs.zeus_spawn_egg": "Яйцо призыва: Зевс",
+  "item.dotamobs.blink_dagger": "Кинжал блинка",
+  "item.dotamobs.radiance": "Сияние"
 }
