@@ -2,10 +2,15 @@ package com.dotamobs.client;
 
 import com.dotamobs.DotaMobs;
 import com.dotamobs.entity.Alchemist;
+import com.dotamobs.entity.Axe;
 import com.dotamobs.entity.CrystalMaiden;
+import com.dotamobs.entity.DotaMerchant;
+import com.dotamobs.entity.Earthshaker;
+import com.dotamobs.entity.Juggernaut;
 import com.dotamobs.entity.MonkeyKing;
 import com.dotamobs.entity.NightStalker;
 import com.dotamobs.entity.Riki;
+import com.dotamobs.entity.Sniper;
 import com.dotamobs.entity.Zeus;
 import com.dotamobs.registry.ModEntities;
 import net.minecraft.client.renderer.entity.CowRenderer;
@@ -40,6 +45,17 @@ public final class ClientSetup {
             context -> new DotaMobRenderer<Riki>(context, skin("riki"), 0.5F));
         event.registerEntityRenderer(ModEntities.ZEUS.get(),
             context -> new DotaMobRenderer<Zeus>(context, skin("zeus"), 0.5F));
+
+        event.registerEntityRenderer(ModEntities.AXE.get(),
+            context -> new DotaMobRenderer<Axe>(context, skin("axe"), 0.5F));
+        event.registerEntityRenderer(ModEntities.SNIPER.get(),
+            context -> new DotaMobRenderer<Sniper>(context, skin("sniper"), 0.5F));
+        event.registerEntityRenderer(ModEntities.JUGGERNAUT.get(),
+            context -> new DotaMobRenderer<Juggernaut>(context, skin("juggernaut"), 0.5F));
+        event.registerEntityRenderer(ModEntities.EARTHSHAKER.get(),
+            context -> new DotaMobRenderer<Earthshaker>(context, skin("earthshaker"), 0.5F));
+        event.registerEntityRenderer(ModEntities.MERCHANT.get(),
+            context -> new DotaMobRenderer<DotaMerchant>(context, skin("merchant"), 0.5F));
 
         // Disguises use the exact vanilla renderers, so they are visually identical to real animals.
         event.registerEntityRenderer(ModEntities.DISGUISED_COW.get(), CowRenderer::new);

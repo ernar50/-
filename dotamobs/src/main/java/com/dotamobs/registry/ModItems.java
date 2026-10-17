@@ -2,7 +2,9 @@ package com.dotamobs.registry;
 
 import com.dotamobs.DotaMobs;
 import com.dotamobs.item.BlinkDaggerItem;
+import com.dotamobs.item.EulsScepterItem;
 import com.dotamobs.item.PudgeHookItem;
+import com.dotamobs.item.TownPortalScrollItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -53,6 +55,41 @@ public final class ModItems {
         () -> new Item(new Item.Properties()
             .setId(ITEMS.key("radiance"))
             .stacksTo(1)));
+
+    public static final RegistryObject<Item> AXE_SPAWN_EGG = ITEMS.register("axe_spawn_egg",
+        () -> new SpawnEggItem(new Item.Properties()
+            .setId(ITEMS.key("axe_spawn_egg"))
+            .spawnEgg(ModEntities.AXE.get())));
+
+    public static final RegistryObject<Item> SNIPER_SPAWN_EGG = ITEMS.register("sniper_spawn_egg",
+        () -> new SpawnEggItem(new Item.Properties()
+            .setId(ITEMS.key("sniper_spawn_egg"))
+            .spawnEgg(ModEntities.SNIPER.get())));
+
+    public static final RegistryObject<Item> JUGGERNAUT_SPAWN_EGG = ITEMS.register("juggernaut_spawn_egg",
+        () -> new SpawnEggItem(new Item.Properties()
+            .setId(ITEMS.key("juggernaut_spawn_egg"))
+            .spawnEgg(ModEntities.JUGGERNAUT.get())));
+
+    public static final RegistryObject<Item> EARTHSHAKER_SPAWN_EGG = ITEMS.register("earthshaker_spawn_egg",
+        () -> new SpawnEggItem(new Item.Properties()
+            .setId(ITEMS.key("earthshaker_spawn_egg"))
+            .spawnEgg(ModEntities.EARTHSHAKER.get())));
+
+    public static final RegistryObject<Item> MERCHANT_SPAWN_EGG = ITEMS.register("merchant_spawn_egg",
+        () -> new SpawnEggItem(new Item.Properties()
+            .setId(ITEMS.key("merchant_spawn_egg"))
+            .spawnEgg(ModEntities.MERCHANT.get())));
+
+    public static final RegistryObject<Item> EULS_SCEPTER = ITEMS.register("euls_scepter",
+        () -> new EulsScepterItem(new Item.Properties()
+            .setId(ITEMS.key("euls_scepter"))
+            .stacksTo(1)));
+
+    public static final RegistryObject<Item> TOWN_PORTAL_SCROLL = ITEMS.register("town_portal_scroll",
+        () -> new TownPortalScrollItem(new Item.Properties()
+            .setId(ITEMS.key("town_portal_scroll"))
+            .stacksTo(16)));
 
     public static final RegistryObject<Item> PUDGE_HOOK = ITEMS.register("pudge_hook",
         () -> new PudgeHookItem(new Item.Properties()

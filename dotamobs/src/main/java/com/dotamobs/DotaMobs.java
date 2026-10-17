@@ -1,14 +1,20 @@
 package com.dotamobs;
 
 import com.dotamobs.entity.Alchemist;
+import com.dotamobs.entity.Axe;
 import com.dotamobs.entity.CrystalMaiden;
+import com.dotamobs.entity.DotaMerchant;
+import com.dotamobs.entity.Earthshaker;
+import com.dotamobs.entity.Juggernaut;
 import com.dotamobs.entity.MonkeyKing;
 import com.dotamobs.entity.NightStalker;
 import com.dotamobs.entity.Riki;
+import com.dotamobs.entity.Sniper;
 import com.dotamobs.entity.Zeus;
 import com.dotamobs.registry.ModEntities;
 import com.dotamobs.registry.ModItems;
 import com.dotamobs.registry.ModLoot;
+import com.dotamobs.util.MerchantSpawner;
 import com.dotamobs.util.RadianceEffects;
 import com.dotamobs.util.ServerTasks;
 import net.minecraft.world.entity.SpawnPlacementTypes;
@@ -46,6 +52,8 @@ public final class DotaMobs {
 
         // Runs the short timed jobs (ice melting, hook pulling).
         TickEvent.ServerTickEvent.Post.BUS.addListener(ServerTasks::onServerTick);
+        // Puts a merchant into villages.
+        TickEvent.ServerTickEvent.Post.BUS.addListener(MerchantSpawner::onServerTick);
     }
 
     private static void onAttributes(EntityAttributeCreationEvent event) {
@@ -55,6 +63,11 @@ public final class DotaMobs {
         event.put(ModEntities.CRYSTAL_MAIDEN.get(), CrystalMaiden.createAttributes().build());
         event.put(ModEntities.RIKI.get(), Riki.createAttributes().build());
         event.put(ModEntities.ZEUS.get(), Zeus.createAttributes().build());
+        event.put(ModEntities.AXE.get(), Axe.createAttributes().build());
+        event.put(ModEntities.SNIPER.get(), Sniper.createAttributes().build());
+        event.put(ModEntities.JUGGERNAUT.get(), Juggernaut.createAttributes().build());
+        event.put(ModEntities.EARTHSHAKER.get(), Earthshaker.createAttributes().build());
+        event.put(ModEntities.MERCHANT.get(), DotaMerchant.createAttributes().build());
 
         // The disguised animals behave exactly like the vanilla ones.
         event.put(ModEntities.DISGUISED_COW.get(), Cow.createAttributes().build());
@@ -93,6 +106,26 @@ public final class DotaMobs {
         event.register(ModEntities.ZEUS.get(),
             SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
             Zeus::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+
+        // Axe: on the surface under the open sky, day or night.
+        event.register(ModEntities.AXE.get(),
+            SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+            Axe::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+
+        // Sniper: on the surface under the open sky, day or night.
+        event.register(ModEntities.SNIPER.get(),
+            SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+            Sniper::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+
+        // Juggernaut: on the surface under the open sky, day or night.
+        event.register(ModEntities.JUGGERNAUT.get(),
+            SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+            Juggernaut::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+
+        // Earthshaker: on the surface under the open sky, day or night.
+        event.register(ModEntities.EARTHSHAKER.get(),
+            SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+            Earthshaker::checkSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
     }
 
     private static void onCreativeTab(BuildCreativeModeTabContentsEvent event) {
@@ -103,10 +136,17 @@ public final class DotaMobs {
             event.accept(ModItems.CRYSTAL_MAIDEN_SPAWN_EGG);
             event.accept(ModItems.RIKI_SPAWN_EGG);
             event.accept(ModItems.ZEUS_SPAWN_EGG);
+            event.accept(ModItems.AXE_SPAWN_EGG);
+            event.accept(ModItems.SNIPER_SPAWN_EGG);
+            event.accept(ModItems.JUGGERNAUT_SPAWN_EGG);
+            event.accept(ModItems.EARTHSHAKER_SPAWN_EGG);
+            event.accept(ModItems.MERCHANT_SPAWN_EGG);
         } else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(ModItems.PUDGE_HOOK);
             event.accept(ModItems.BLINK_DAGGER);
             event.accept(ModItems.RADIANCE);
+            event.accept(ModItems.EULS_SCEPTER);
+            event.accept(ModItems.TOWN_PORTAL_SCROLL);
         }
     }
 }

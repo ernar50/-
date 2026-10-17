@@ -2,13 +2,18 @@ package com.dotamobs.registry;
 
 import com.dotamobs.DotaMobs;
 import com.dotamobs.entity.Alchemist;
+import com.dotamobs.entity.Axe;
 import com.dotamobs.entity.CrystalMaiden;
 import com.dotamobs.entity.DisguisedCow;
 import com.dotamobs.entity.DisguisedPig;
 import com.dotamobs.entity.DisguisedSheep;
+import com.dotamobs.entity.DotaMerchant;
+import com.dotamobs.entity.Earthshaker;
+import com.dotamobs.entity.Juggernaut;
 import com.dotamobs.entity.MonkeyKing;
 import com.dotamobs.entity.NightStalker;
 import com.dotamobs.entity.Riki;
+import com.dotamobs.entity.Sniper;
 import com.dotamobs.entity.Zeus;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -58,6 +63,37 @@ public final class ModEntities {
             .sized(0.6F, 1.95F)
             .clientTrackingRange(10)
             .build(ENTITIES.key("zeus")));
+
+    public static final RegistryObject<EntityType<Axe>> AXE = ENTITIES.register("axe",
+        () -> EntityType.Builder.of(Axe::new, MobCategory.MONSTER)
+            .sized(0.7F, 1.95F)
+            .clientTrackingRange(8)
+            .build(ENTITIES.key("axe")));
+
+    public static final RegistryObject<EntityType<Sniper>> SNIPER = ENTITIES.register("sniper",
+        () -> EntityType.Builder.of(Sniper::new, MobCategory.MONSTER)
+            .sized(0.6F, 1.95F)
+            .clientTrackingRange(10)
+            .build(ENTITIES.key("sniper")));
+
+    public static final RegistryObject<EntityType<Juggernaut>> JUGGERNAUT = ENTITIES.register("juggernaut",
+        () -> EntityType.Builder.of(Juggernaut::new, MobCategory.MONSTER)
+            .sized(0.6F, 1.95F)
+            .clientTrackingRange(8)
+            .build(ENTITIES.key("juggernaut")));
+
+    public static final RegistryObject<EntityType<Earthshaker>> EARTHSHAKER = ENTITIES.register("earthshaker",
+        () -> EntityType.Builder.of(Earthshaker::new, MobCategory.MONSTER)
+            .sized(0.8F, 2.0F)
+            .clientTrackingRange(8)
+            .build(ENTITIES.key("earthshaker")));
+
+    // Sells Dota items in villages; spawned by util/MerchantSpawner, never by the normal spawner.
+    public static final RegistryObject<EntityType<DotaMerchant>> MERCHANT = ENTITIES.register("merchant",
+        () -> EntityType.Builder.of(DotaMerchant::new, MobCategory.CREATURE)
+            .sized(0.6F, 1.95F)
+            .clientTrackingRange(8)
+            .build(ENTITIES.key("merchant")));
 
     // Peaceful look-alikes the Monkey King turns into. Never spawned naturally.
     public static final RegistryObject<EntityType<DisguisedCow>> DISGUISED_COW = ENTITIES.register("disguised_cow",
