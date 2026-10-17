@@ -110,10 +110,10 @@ public class DotaMerchant extends PathfinderMob {
             if (!player.getInventory().add(reward)) {
                 level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY() + 0.5, player.getZ(), reward));
             }
-            player.displayClientMessage(Component.translatable("merchant.dotamobs.bought", name), true);
+            player.sendSystemMessage(Component.translatable("merchant.dotamobs.bought", name));
         } else {
             ItemStack shown = new ItemStack(offer.item().get());
-            player.displayClientMessage(Component.translatable("merchant.dotamobs.need", offer.price(), shown.getHoverName()), true);
+            player.sendSystemMessage(Component.translatable("merchant.dotamobs.need", offer.price(), shown.getHoverName()));
         }
         return InteractionResult.SUCCESS;
     }

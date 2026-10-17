@@ -39,14 +39,14 @@ public class TownPortalScrollItem extends Item {
         Vec3 start = player.position();
         int[] ticks = {0};
         player.getCooldowns().addCooldown(stack, COOLDOWN);
-        player.displayClientMessage(Component.translatable("msg.dotamobs.tp_start"), true);
+        player.sendSystemMessage(Component.translatable("msg.dotamobs.tp_start"));
 
         ServerTasks.add(server -> {
             if (!serverPlayer.isAlive() || serverPlayer.isRemoved()) {
                 return true;
             }
             if (serverPlayer.position().distanceToSqr(start) > MAX_DRIFT_SQR) {
-                serverPlayer.displayClientMessage(Component.translatable("msg.dotamobs.tp_cancel"), true);
+                serverPlayer.sendSystemMessage(Component.translatable("msg.dotamobs.tp_cancel"));
                 return true;
             }
             ticks[0]++;
@@ -78,6 +78,6 @@ public class TownPortalScrollItem extends Item {
         }
         level.sendParticles(ParticleTypes.PORTAL, player.getX(), player.getY() + 1.0, player.getZ(), 40, 0.4, 0.8, 0.4, 0.5);
         player.teleportTo(home.getX() + 0.5, home.getY(), home.getZ() + 0.5);
-        player.displayClientMessage(Component.translatable("msg.dotamobs.tp_done"), true);
+        player.sendSystemMessage(Component.translatable("msg.dotamobs.tp_done"));
     }
 }
