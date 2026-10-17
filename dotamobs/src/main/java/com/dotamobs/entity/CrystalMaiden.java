@@ -2,7 +2,6 @@ package com.dotamobs.entity;
 
 import com.dotamobs.util.IceCages;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -23,15 +22,21 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.Snowball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.EntityHitResult;
 
 /**
- * Lives in snowy biomes. Attacks from range with a frost bolt: it hurts a little, slows the victim
+ * Lives in snowy biomes. Attacks from range with a snowball: it hurts a little, slows the victim
  * down, covers them in frost and, for a few seconds, walls them in with ice.
  */
 public class CrystalMaiden extends Monster implements RangedAttackMob {
+    /** Damage of a snowball that hits. */
+    private static final float HIT_DAMAGE = 2.0F;
+
     public CrystalMaiden(EntityType<? extends Monster> type, Level level) {
         super(type, level);
     }
@@ -46,8 +51,8 @@ public class CrystalMaiden extends Monster implements RangedAttackMob {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        // Shoots every ~2.5 seconds from up to 16 blocks away.
-        this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0, 50, 16.0F));
+        // Shoots every ~3 seconds from up to 16 blocks away.
+        this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0, 60, 16.0F));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.9));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -61,18 +66,29 @@ public class CrystalMaiden extends Monster implements RangedAttackMob {
             return;
         }
 
-        // A trail of snowflakes from her to the target, so the shot is visible.
-        Vec3 from = this.getEyePosition();
-        Vec3 to = target.getBoundingBox().getCenter();
-        for (int i = 0; i <= 20; i++) {
-            Vec3 p = from.lerp(to, i / 20.0);
-            level.sendParticles(ParticleTypes.SNOWFLAKE, p.x, p.y, p.z, 2, 0.05, 0.05, 0.05, 0.0);
-        }
+        // A real snowball: it flies in an arc, is stopped by blocks and by any creature in the way,
+        // and only does its frost effects when it actually hits something alive.
+        CrystalMaiden maiden = this;
+        Snowball ball = new Snowball(level, this, new ItemStack(Items.SNOWBALL)) {
+            @Override
+            protected void onHitEntity(EntityHitResult hit) {
+                super.onHitEntity(hit);
+                if (hit.getEntity() instanceof LivingEntity victim && victim != maiden && victim.isAlive()) {
+                    victim.hurtServer(level, maiden.damageSources().mobProjectile(this, maiden), HIT_DAMAGE);
+                    victim.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 2));
+                    victim.setTicksFrozen(200);
+                    IceCages.freezeAround(level, victim);
+                }
+            }
+        };
 
-        target.hurtServer(level, this.damageSources().mobAttack(this), 3.0F);
-        target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 2));
-        target.setTicksFrozen(200);
-        IceCages.freezeAround(level, target);
+        double dx = target.getX() - this.getX();
+        double dy = target.getEyeY() - 1.1 - ball.getY();
+        double dz = target.getZ() - this.getZ();
+        double arc = Math.sqrt(dx * dx + dz * dz) * 0.2;
+        // Speed 1.4 and a little inaccuracy: a moving player can dodge it.
+        ball.shoot(dx, dy + arc, dz, 1.4F, 8.0F);
+        level.addFreshEntity(ball);
     }
 
     /** Natural spawn rule: under the open sky, day or night (snow biomes are picked by the biome modifier). */

@@ -7,12 +7,16 @@ modId="dotamobs"
 version="${mod_version}"
 displayName="Dota Mobs"
 authors="You"
-description='''Four new mobs and one item:
+description='''Eleven new mobs and six items:
 Night Stalker (turns day into night when he hits you),
 Alchemist (drops gold nuggets when hit, lives in mineshafts),
 Monkey King (lives in trees, jumps high, disguises as farm animals),
 Crystal Maiden (ranged ice attack, lives in snowy biomes),
-and Pudge's Hook (pulls creatures to you).'''
+Riki (invisible, backstabs), Zeus (calls down lightning),
+Pudge's Hook (pulls creatures to you), Blink Dagger (short teleport)
+Radiance (sets creatures around your target on fire),
+Axe, Sniper, Juggernaut, Earthshaker, a village Merchant,
+Eul's Scepter and Town Portal Scroll.'''
 
 [[dependencies.dotamobs]]
     modId="forge"

@@ -100,7 +100,8 @@ public class PudgeHookItem extends Item {
             }
             // knockback() pushes AWAY from the given direction, so the direction is flipped
             // to push the victim TOWARDS the owner. It also keeps the client in sync (players too).
-            victim.knockback(0.25, -dx, -dz);
+            // In 26.3 knockback() also takes the damage source, the damage and a "comes from an effect" flag.
+            victim.knockback(0.25, -dx, -dz, owner.damageSources().generic(), 0.0F, false);
             return false;
         });
     }
