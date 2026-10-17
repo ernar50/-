@@ -111,6 +111,7 @@ public class Earthshaker extends Monster {
             distance[0]++;
             Vec3 p = from.add(step.scale(distance[0]));
             level.sendParticles(ParticleTypes.POOF, p.x, p.y + 0.2, p.z, 10, 0.4, 0.2, 0.4, 0.05);
+            crackGround(level, p);
 
             AABB zone = new AABB(p.x - 1.0, p.y - 2.0, p.z - 1.0, p.x + 1.0, p.y + 3.0, p.z + 1.0);
             for (LivingEntity victim : level.getEntitiesOfClass(LivingEntity.class, zone, e -> e != self && e.isAlive())) {
@@ -126,6 +127,23 @@ public class Earthshaker extends Monster {
             }
             return distance[0] >= FISSURE_LENGTH;
         });
+    }
+
+    /** The fissure digs a trench: the ground under it and soft blocks in its way (up to 2 high) break, no drops. */
+    private static void crackGround(ServerLevel level, Vec3 p) {
+        BlockPos floor = BlockPos.containing(p.x, p.y - 0.5, p.z);
+        for (int dy = 0; dy <= 2; dy++) {
+            BlockPos pos = floor.above(dy);
+            net.minecraft.world.level.block.state.BlockState state = level.getBlockState(pos);
+            if (state.isAir() || level.getBlockEntity(pos) != null) {
+                continue;
+            }
+            float hardness = state.getDestroySpeed(level, pos);
+            // Dirt, sand, grass, gravel, leaves, snow... but never stone, ores, bedrock or obsidian.
+            if (hardness >= 0.0F && hardness <= 0.9F && state.getFluidState().isEmpty()) {
+                level.destroyBlock(pos, false);
+            }
+        }
     }
 
     @Override
