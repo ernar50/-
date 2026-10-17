@@ -4,7 +4,6 @@ import com.dotamobs.DotaMobs;
 import com.dotamobs.entity.Alchemist;
 import com.dotamobs.entity.Axe;
 import com.dotamobs.entity.CrystalMaiden;
-import com.dotamobs.entity.DotaMerchant;
 import com.dotamobs.entity.Earthshaker;
 import com.dotamobs.entity.Juggernaut;
 import com.dotamobs.entity.MonkeyKing;
@@ -16,6 +15,9 @@ import com.dotamobs.registry.ModEntities;
 import net.minecraft.client.renderer.entity.CowRenderer;
 import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.client.renderer.entity.SheepRenderer;
+import net.minecraft.client.renderer.entity.VillagerRenderer;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.resources.Identifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -54,8 +56,10 @@ public final class ClientSetup {
             context -> new DotaMobRenderer<Juggernaut>(context, skin("juggernaut"), 0.5F));
         event.registerEntityRenderer(ModEntities.EARTHSHAKER.get(),
             context -> new DotaMobRenderer<Earthshaker>(context, skin("earthshaker"), 0.5F));
-        event.registerEntityRenderer(ModEntities.MERCHANT.get(),
-            context -> new DotaMobRenderer<DotaMerchant>(context, skin("merchant"), 0.5F));
+        // The merchant is a real villager, so he uses the vanilla villager renderer.
+        @SuppressWarnings({"unchecked", "rawtypes"})
+        EntityType<Villager> merchantType = (EntityType<Villager>) (EntityType) ModEntities.MERCHANT.get();
+        event.registerEntityRenderer(merchantType, VillagerRenderer::new);
 
         // Disguises use the exact vanilla renderers, so they are visually identical to real animals.
         event.registerEntityRenderer(ModEntities.DISGUISED_COW.get(), CowRenderer::new);
