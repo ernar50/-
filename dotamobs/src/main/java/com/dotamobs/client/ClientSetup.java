@@ -33,6 +33,11 @@ public final class ClientSetup {
     }
 
     @SubscribeEvent
+    public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(RoshanModel.LAYER, RoshanModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.NIGHT_STALKER.get(),
             context -> new DotaMobRenderer<NightStalker>(context, skin("night_stalker"), 0.5F));
@@ -47,6 +52,7 @@ public final class ClientSetup {
         event.registerEntityRenderer(ModEntities.ZEUS.get(),
             context -> new DotaMobRenderer<Zeus>(context, skin("zeus"), 0.5F));
 
+        event.registerEntityRenderer(ModEntities.ROSHAN.get(), RoshanRenderer::new);
         event.registerEntityRenderer(ModEntities.AXE.get(),
             context -> new DotaMobRenderer<Axe>(context, skin("axe"), 0.5F));
         event.registerEntityRenderer(ModEntities.SNIPER.get(),

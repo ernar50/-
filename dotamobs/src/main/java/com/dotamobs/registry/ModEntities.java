@@ -13,6 +13,7 @@ import com.dotamobs.entity.Juggernaut;
 import com.dotamobs.entity.MonkeyKing;
 import com.dotamobs.entity.NightStalker;
 import com.dotamobs.entity.Riki;
+import com.dotamobs.entity.Roshan;
 import com.dotamobs.entity.Sniper;
 import com.dotamobs.entity.Zeus;
 import net.minecraft.world.entity.EntityType;
@@ -87,6 +88,13 @@ public final class ModEntities {
             .sized(0.8F, 2.0F)
             .clientTrackingRange(8)
             .build(ENTITIES.key("earthshaker")));
+
+    // Guardian of the Roshan lair structure; placed by the structure, never by the normal spawner.
+    public static final RegistryObject<EntityType<Roshan>> ROSHAN = ENTITIES.register("roshan",
+        () -> EntityType.Builder.of(Roshan::new, MobCategory.MONSTER)
+            .sized(1.1F, 2.0F)
+            .clientTrackingRange(10)
+            .build(ENTITIES.key("roshan")));
 
     // Sells Dota items in villages; spawned by util/MerchantSpawner, never by the normal spawner.
     public static final RegistryObject<EntityType<DotaMerchant>> MERCHANT = ENTITIES.register("merchant",
