@@ -37,5 +37,6 @@
   "merchant.dotamobs.need": "You need %s gold ingots in hand for: %s. Sneak + right-click shows the next item.",
   "entity.dotamobs.roshan": "Roshan",
   "item.dotamobs.roshan_spawn_egg": "Roshan Spawn Egg",
-  "item.dotamobs.cheese": "Cheese"
+  "item.dotamobs.cheese": "Cheese",
+  "item.dotamobs.force_staff": "Force Staff"
 }

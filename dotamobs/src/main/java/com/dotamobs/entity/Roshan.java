@@ -1,9 +1,13 @@
 package com.dotamobs.entity;
 
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.BossEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -35,6 +39,10 @@ public class Roshan extends Monster {
 
     private int slamCooldown = 60;
 
+    /** The health bar at the top of the screen, like the Ender Dragon and the Wither have. */
+    private final ServerBossEvent bossEvent = new ServerBossEvent(
+        Component.translatable("entity.dotamobs.roshan"), BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.PROGRESS);
+
     public Roshan(EntityType<? extends Monster> type, Level level) {
         super(type, level);
     }
@@ -59,6 +67,24 @@ public class Roshan extends Monster {
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+    }
+
+    @Override
+    public void startSeenByPlayer(ServerPlayer player) {
+        super.startSeenByPlayer(player);
+        this.bossEvent.addPlayer(player);
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayer player) {
+        super.stopSeenByPlayer(player);
+        this.bossEvent.removePlayer(player);
+    }
+
+    @Override
+    protected void customServerAiStep(ServerLevel level) {
+        super.customServerAiStep(level);
+        this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
     }
 
     @Override

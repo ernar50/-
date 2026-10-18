@@ -31,6 +31,7 @@ public class DotaMerchant extends Villager {
     /** What he sells and for how many gold ingots. Edit this list to change the shop. */
     private static final List<Offer> CATALOG = List.of(
         new Offer(ModItems.TOWN_PORTAL_SCROLL, 3),
+        new Offer(ModItems.FORCE_STAFF, 10),
         new Offer(ModItems.PUDGE_HOOK, 12),
         new Offer(ModItems.EULS_SCEPTER, 14),
         new Offer(ModItems.BLINK_DAGGER, 16),

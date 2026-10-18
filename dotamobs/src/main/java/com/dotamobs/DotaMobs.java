@@ -151,6 +151,7 @@ public final class DotaMobs {
             event.accept(ModItems.EULS_SCEPTER);
             event.accept(ModItems.TOWN_PORTAL_SCROLL);
             event.accept(ModItems.CHEESE);
+            event.accept(ModItems.FORCE_STAFF);
         }
     }
 }

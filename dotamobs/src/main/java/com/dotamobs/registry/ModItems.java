@@ -4,6 +4,7 @@ import com.dotamobs.DotaMobs;
 import com.dotamobs.item.BlinkDaggerItem;
 import com.dotamobs.item.CheeseItem;
 import com.dotamobs.item.EulsScepterItem;
+import com.dotamobs.item.ForceStaffItem;
 import com.dotamobs.item.PudgeHookItem;
 import com.dotamobs.item.TownPortalScrollItem;
 import net.minecraft.world.item.Item;
@@ -67,6 +68,12 @@ public final class ModItems {
         () -> new CheeseItem(new Item.Properties()
             .setId(ITEMS.key("cheese"))
             .stacksTo(16)));
+
+    // Right-click: shoves the creature you look at away (or dashes you forward). See item/ForceStaffItem.java.
+    public static final RegistryObject<Item> FORCE_STAFF = ITEMS.register("force_staff",
+        () -> new ForceStaffItem(new Item.Properties()
+            .setId(ITEMS.key("force_staff"))
+            .stacksTo(1)));
 
     public static final RegistryObject<Item> AXE_SPAWN_EGG = ITEMS.register("axe_spawn_egg",
         () -> new SpawnEggItem(new Item.Properties()

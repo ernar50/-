@@ -38,6 +38,11 @@
               }
             }
           ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dotamobs:force_staff",
+          "weight": 4
         }
       ]
     },
