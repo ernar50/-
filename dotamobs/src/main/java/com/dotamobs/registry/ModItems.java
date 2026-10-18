@@ -2,6 +2,7 @@ package com.dotamobs.registry;
 
 import com.dotamobs.DotaMobs;
 import com.dotamobs.item.BlinkDaggerItem;
+import com.dotamobs.item.CheeseItem;
 import com.dotamobs.item.EulsScepterItem;
 import com.dotamobs.item.PudgeHookItem;
 import com.dotamobs.item.TownPortalScrollItem;
@@ -55,6 +56,17 @@ public final class ModItems {
         () -> new Item(new Item.Properties()
             .setId(ITEMS.key("radiance"))
             .stacksTo(1)));
+
+    public static final RegistryObject<Item> ROSHAN_SPAWN_EGG = ITEMS.register("roshan_spawn_egg",
+        () -> new SpawnEggItem(new Item.Properties()
+            .setId(ITEMS.key("roshan_spawn_egg"))
+            .spawnEgg(ModEntities.ROSHAN.get())));
+
+    // Dropped by Roshan. Right-click: full health and hunger.
+    public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese",
+        () -> new CheeseItem(new Item.Properties()
+            .setId(ITEMS.key("cheese"))
+            .stacksTo(16)));
 
     public static final RegistryObject<Item> AXE_SPAWN_EGG = ITEMS.register("axe_spawn_egg",
         () -> new SpawnEggItem(new Item.Properties()

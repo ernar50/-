@@ -2,6 +2,7 @@ package com.dotamobs;
 
 import com.dotamobs.entity.Alchemist;
 import com.dotamobs.entity.Axe;
+import com.dotamobs.entity.Roshan;
 import com.dotamobs.entity.CrystalMaiden;
 import com.dotamobs.entity.DotaMerchant;
 import com.dotamobs.entity.Earthshaker;
@@ -64,6 +65,7 @@ public final class DotaMobs {
         event.put(ModEntities.RIKI.get(), Riki.createAttributes().build());
         event.put(ModEntities.ZEUS.get(), Zeus.createAttributes().build());
         event.put(ModEntities.AXE.get(), Axe.createAttributes().build());
+        event.put(ModEntities.ROSHAN.get(), Roshan.createAttributes().build());
         event.put(ModEntities.SNIPER.get(), Sniper.createAttributes().build());
         event.put(ModEntities.JUGGERNAUT.get(), Juggernaut.createAttributes().build());
         event.put(ModEntities.EARTHSHAKER.get(), Earthshaker.createAttributes().build());
@@ -141,12 +143,14 @@ public final class DotaMobs {
             event.accept(ModItems.JUGGERNAUT_SPAWN_EGG);
             event.accept(ModItems.EARTHSHAKER_SPAWN_EGG);
             event.accept(ModItems.MERCHANT_SPAWN_EGG);
+            event.accept(ModItems.ROSHAN_SPAWN_EGG);
         } else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(ModItems.PUDGE_HOOK);
             event.accept(ModItems.BLINK_DAGGER);
             event.accept(ModItems.RADIANCE);
             event.accept(ModItems.EULS_SCEPTER);
             event.accept(ModItems.TOWN_PORTAL_SCROLL);
+            event.accept(ModItems.CHEESE);
         }
     }
 }

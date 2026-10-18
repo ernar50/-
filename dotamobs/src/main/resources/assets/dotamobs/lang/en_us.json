@@ -34,5 +34,8 @@
   "msg.dotamobs.tp_done": "Welcome home!",
   "merchant.dotamobs.title": "Merchant: %s (%s gold)",
   "merchant.dotamobs.bought": "Bought: %s",
-  "merchant.dotamobs.need": "You need %s gold ingots in hand for: %s. Sneak + right-click shows the next item."
+  "merchant.dotamobs.need": "You need %s gold ingots in hand for: %s. Sneak + right-click shows the next item.",
+  "entity.dotamobs.roshan": "Roshan",
+  "item.dotamobs.roshan_spawn_egg": "Roshan Spawn Egg",
+  "item.dotamobs.cheese": "Cheese"
 }

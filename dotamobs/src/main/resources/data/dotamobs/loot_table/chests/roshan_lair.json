@@ -134,22 +134,6 @@
           ]
         }
       ]
-    },
-    {
-      "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.35
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:totem_of_undying",
-          "weight": 1
-        }
-      ]
     }
   ]
 }

@@ -34,5 +34,8 @@
   "msg.dotamobs.tp_done": "Добро пожаловать домой!",
   "merchant.dotamobs.title": "Торговец: %s (%s зол.)",
   "merchant.dotamobs.bought": "Куплено: %s",
-  "merchant.dotamobs.need": "Нужно %s золотых слитков в руке для: %s. Shift + ПКМ показывает следующий товар."
+  "merchant.dotamobs.need": "Нужно %s золотых слитков в руке для: %s. Shift + ПКМ показывает следующий товар.",
+  "entity.dotamobs.roshan": "Рошан",
+  "item.dotamobs.roshan_spawn_egg": "Яйцо призыва: Рошан",
+  "item.dotamobs.cheese": "Сыр"
 }
