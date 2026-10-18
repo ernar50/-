@@ -1,5 +1,6 @@
 package com.dotamobs.entity;
 
+import java.util.UUID;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
@@ -41,7 +42,7 @@ public class Roshan extends Monster {
 
     /** The health bar at the top of the screen, like the Ender Dragon and the Wither have. */
     private final ServerBossEvent bossEvent = new ServerBossEvent(
-        Component.translatable("entity.dotamobs.roshan"), BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.PROGRESS);
+        UUID.randomUUID(), Component.translatable("entity.dotamobs.roshan"), BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.PROGRESS);
 
     public Roshan(EntityType<? extends Monster> type, Level level) {
         super(type, level);
