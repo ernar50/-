@@ -3,6 +3,7 @@ package com.dotamobs.entity;
 import com.dotamobs.registry.ModItems;
 import java.util.List;
 import java.util.function.Supplier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.entity.npc.villager.VillagerData;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -46,6 +48,23 @@ public class DotaMerchant extends Villager {
             .add(Attributes.MAX_HEALTH, 30.0)
             .add(Attributes.MOVEMENT_SPEED, 0.5)
             .add(Attributes.FOLLOW_RANGE, 48.0);
+    }
+
+    /**
+     * The vanilla AI closes the trade window every tick for a villager without a job.
+     * While someone is trading with him we skip that AI step; the rest of the time he walks about normally.
+     */
+    @Override
+    protected void customServerAiStep(ServerLevel level) {
+        if (this.isTrading()) {
+            return;
+        }
+        super.customServerAiStep(level);
+    }
+
+    /** The merchant never takes a job: his clothes and look stay as they are. */
+    @Override
+    public void setVillagerData(VillagerData data) {
     }
 
     /** Always our own shop, whatever job the villager brain thinks he has. */

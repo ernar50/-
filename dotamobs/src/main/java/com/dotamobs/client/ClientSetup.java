@@ -15,7 +15,6 @@ import com.dotamobs.registry.ModEntities;
 import net.minecraft.client.renderer.entity.CowRenderer;
 import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.client.renderer.entity.SheepRenderer;
-import net.minecraft.client.renderer.entity.VillagerRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.resources.Identifier;
@@ -59,7 +58,7 @@ public final class ClientSetup {
         // The merchant is a real villager, so he uses the vanilla villager renderer.
         @SuppressWarnings({"unchecked", "rawtypes"})
         EntityType<Villager> merchantType = (EntityType<Villager>) (EntityType) ModEntities.MERCHANT.get();
-        event.registerEntityRenderer(merchantType, VillagerRenderer::new);
+        event.registerEntityRenderer(merchantType, MerchantRenderer::new);
 
         // Disguises use the exact vanilla renderers, so they are visually identical to real animals.
         event.registerEntityRenderer(ModEntities.DISGUISED_COW.get(), CowRenderer::new);
